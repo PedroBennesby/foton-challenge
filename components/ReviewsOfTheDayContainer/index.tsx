@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, AspectRatio } from '@chakra-ui/react';
+import Iframe from 'react-iframe';
 
 export default function ReviewsOfTheDayContainer() {
   return (
@@ -8,10 +9,10 @@ export default function ReviewsOfTheDayContainer() {
         Reviews of The Day
       </Text>
       <AspectRatio w="100%" ratio={16 / 9} borderRadius="5px">
-        <iframe
-          src="https://www.youtube.com/watch?v=FYDdinYveKU"
+        <Iframe
+          url="https://www.youtube.com/watch?v=FYDdinYveKU"
           allowFullScreen
-        ></iframe>
+        ></Iframe>
       </AspectRatio>
     </div>
   );
