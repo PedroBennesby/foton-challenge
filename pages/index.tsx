@@ -1,13 +1,35 @@
 import { Box, Heading } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import type { InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import CurrentlyReadingContainer from '../components/CurrentlyReadingContainer';
 import NewBooksContainer from '../components/NewBooksContainer';
 import ReviewsOfTheDayContainer from '../components/ReviewsOfTheDayContainer';
-import SearchBox from '../components/SearchBox';
+import SearchBox from '../components/SearchBar';
+import { GetStaticProps } from 'next';
 
-const Home: NextPage = () => {
+type Books = {
+  title: string;
+  author: string;
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const res = await fetch(
+    'https://www.googleapis.com/books/v1/volumes?q=the%20name%20of%20the%20wind=lite'
+  );
+  const books: Books[] = await res.json();
+  console.log(books);
+
+  return {
+    props: {
+      books,
+    },
+  };
+};
+
+const Home: NextPage = ({
+  books,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div>
       <Head>

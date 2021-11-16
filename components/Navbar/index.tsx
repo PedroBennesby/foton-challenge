@@ -1,107 +1,35 @@
-import {
-  Flex,
-  Button,
-  IconButton,
-  useColorModeValue,
-  useColorMode,
-} from '@chakra-ui/react'
-import { useState } from 'react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import NextLink from 'next/link'
-import ThemeSwitcher from '../ThemeSwitcher'
-import theme from '../theme'
+import { Flex, Text, Image } from '@chakra-ui/react';
 
-function Navbar() {
-  const [display, changeDisplay] = useState('none')
-  const { colorMode, setColorMode } = useColorMode()
+export default function Navbar() {
   return (
-    <Flex justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
-      <Flex display={['none', 'none', 'flex', 'flex']}>
-        <NextLink href="/" passHref>
-          <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
-            Home
-          </Button>
-        </NextLink>
-        <NextLink href="/regras" passHref>
-          <Button as="a" variant="ghost" aria-label="Regras" my={5} w="100%">
-            Regras
-          </Button>
-        </NextLink>
-        <Flex ml="auto">
-          <ThemeSwitcher />
-        </Flex>
-      </Flex>
-
-      <IconButton
-        aria-label="Abrir Menu"
-        size="lg"
-        mt={2}
-        ml={2}
-        icon={<HamburgerIcon />}
-        display={['flex', 'flex', 'none', 'none']}
-        onClick={() => changeDisplay('flex')}
-      />
-
+    <>
       <Flex
-        w="100vw"
-        bgColor={colorMode === 'light' ? 'white' : 'gray.800'}
-        zIndex={20}
-        h="100vh"
-        pos="fixed"
-        top="0"
-        left="0"
-        overflowY="auto"
-        flexDir="column"
-        display={display}
+        w="100%"
+        position="fixed"
+        bottom="0"
+        background="white"
+        padding="10px 55px"
+        justify="space-between"
       >
-        <Flex>
-          <IconButton
-            mt={2}
-            ml={2}
-            aria-label="Fechar Menu"
-            size="lg"
-            icon={<CloseIcon />}
-            onClick={() => changeDisplay('none')}
-            position="absolute"
-            top="0"
-            left="0"
-          />
+        <Flex flexDir="column" h="100%" justify="center" align="center">
+          <Image m="0 auto" src="/home.png" alt="" mb="10px"></Image>
+          <Text fontSize="sm" color="black">
+            Home
+          </Text>
         </Flex>
-        <Flex
-          flexDir="column"
-          align="center"
-          justifyContent="center"
-          margin="auto 0"
-        >
-          <NextLink href="/" passHref>
-            <Button
-              as="a"
-              variant="ghost"
-              aria-label="Home"
-              my={2}
-              w="90%"
-              size="lg"
-            >
-              Home
-            </Button>
-          </NextLink>
-          <NextLink href="/regras" passHref>
-            <Button
-              as="a"
-              variant="ghost"
-              aria-label="Regras"
-              mb={2}
-              w="90%"
-              size="lg"
-            >
-              Regras
-            </Button>
-          </NextLink>
-          <ThemeSwitcher />
+        <Flex flexDir="column" h="100%" justify="center">
+          <Image m="0 auto" src="/book.png" alt="" mb="10px"></Image>
+          <Text fontSize="sm" color="#BFBEBF">
+            Libraries
+          </Text>
+        </Flex>
+        <Flex flexDir="column" h="100%" justify="center">
+          <Image m="0 auto" src="/user.png" alt="" mb="10px"></Image>
+          <Text fontSize="sm" color="#BFBEBF">
+            Profile
+          </Text>
         </Flex>
       </Flex>
-    </Flex>
-  )
+    </>
+  );
 }
-
-export default Navbar

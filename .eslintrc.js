@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     'require-jsdoc': 'off',
     'react/no-children-prop': 'off',
+    'no-unused-vars': 'off',
   },
   settings: {
     react: {

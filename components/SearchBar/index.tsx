@@ -12,7 +12,7 @@ export default function SearchBox() {
 
   const fetchData = async (keyword: string) => {
     const res = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${keyword}`
+      `https://www.googleapis.com/books/v1/volumes?q=${keyword}=lite`
     );
     const data = await res.json();
     console.log(data);
