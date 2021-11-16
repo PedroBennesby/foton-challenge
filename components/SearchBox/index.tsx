@@ -1,4 +1,4 @@
-import { Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
 
@@ -7,6 +7,16 @@ export default function SearchBox() {
 
   const handleClick = () => {
     console.log(keyword);
+    fetchData(keyword);
+  };
+
+  const fetchData = async (keyword: string) => {
+    const res = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${keyword}`
+    );
+    const data = await res.json();
+    console.log(data);
+    return data;
   };
 
   return (
@@ -14,8 +24,10 @@ export default function SearchBox() {
       <form>
         <InputGroup>
           <InputLeftElement
-            pointerEvents="none"
+            pointerEvents="visible"
             children={<SearchIcon color="gray.300" />}
+            onClick={handleClick}
+            cursor="pointer"
           />
           <Input
             bg="#FDFCFC"
@@ -27,7 +39,6 @@ export default function SearchBox() {
             _placeholder={{ color: '#54565A' }}
           />
         </InputGroup>
-        <Button onClick={handleClick}></Button>
       </form>
     </>
   );
