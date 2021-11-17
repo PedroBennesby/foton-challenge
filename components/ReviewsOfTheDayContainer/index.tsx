@@ -1,8 +1,12 @@
 import React from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import Iframe from 'react-iframe';
+import { InferGetStaticPropsType } from 'next';
+import { getStaticProps } from '../../pages';
 
-export default function ReviewsOfTheDayContainer() {
+export default function ReviewsOfTheDayContainer({
+  books,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Text mt="30" mb="15" color="#3F4043" fontSize="lg" fontWeight="600">

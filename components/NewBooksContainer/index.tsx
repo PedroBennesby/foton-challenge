@@ -1,7 +1,11 @@
-import { Box, Text, Flex, Image } from '@chakra-ui/react';
 import React from 'react';
+import { Box, Text, Flex, Image } from '@chakra-ui/react';
+import { getStaticProps } from '../../pages';
+import { InferGetStaticPropsType } from 'next';
 
-export default function NewBooksContainer() {
+export default function NewBooksContainer({
+  books,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Text mt="30" mb="15" color="#3F4043" fontSize="lg" fontWeight="600">
@@ -21,8 +25,10 @@ export default function NewBooksContainer() {
           position="relative"
         >
           <Box display="flex" flexDir="column" zIndex="1" w="100%">
-            <Text fontSize="4xl">Title</Text>
-            <Text fontSize="1xl">Description</Text>
+            <Text fontSize="2xl">{books[0].title}</Text>
+            <Text fontSize="md" maxH="25%">
+              {books[0].author}
+            </Text>
             <Flex direction="row" marginTop="auto" w="100%">
               <Image src="/Graph.png" alt="" objectFit="cover" height="100%" />
               <Text fontWeight="600" fontSize="sm" ml="4px">
@@ -39,7 +45,7 @@ export default function NewBooksContainer() {
               boxSize="70%"
               alt="Capa do livro"
               borderRadius="5px"
-              src="http://books.google.com/books/content?id=NEm4DgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              src={books[0].image}
             />
             <Image
               src="/Oval.png"

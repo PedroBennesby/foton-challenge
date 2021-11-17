@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, Text, Flex, Image } from '@chakra-ui/react';
+import { InferGetStaticPropsType } from 'next';
+import { getStaticProps } from '../../pages';
 
-export default function CurrentlyReadingContainer() {
+export default function CurrentlyReadingContainer({
+  books,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Text mt="30" mb="15" color="#3F4043" fontSize="lg" fontWeight="600">

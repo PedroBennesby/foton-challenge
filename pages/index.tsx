@@ -8,16 +8,28 @@ import ReviewsOfTheDayContainer from '../components/ReviewsOfTheDayContainer';
 import SearchBox from '../components/SearchBar';
 import { GetStaticProps } from 'next';
 
-type Books = {
-  title: string;
-  author: string;
+type Book = {
+  title: string | null;
+  author: string | null;
+  description: string | null;
+  image: string | null;
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch(
     'https://www.googleapis.com/books/v1/volumes?q=the%20name%20of%20the%20wind=lite'
   );
-  const books: Books[] = await res.json();
+  const books: Book[] = new Array<Book>();
+  const bookResponse = await res.json();
+
+  for (const book of bookResponse.items) {
+    books.push({
+      title: book.volumeInfo.title || null,
+      author: book.volumeInfo.authors || null,
+      image: book.volumeInfo.imageLinks.thumbnail || null,
+      description: book.volumeInfo.description || null,
+    });
+  }
   console.log(books);
 
   return {
@@ -30,6 +42,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Home: NextPage = ({
   books,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(books);
   return (
     <div>
       <Head>
@@ -46,9 +59,9 @@ const Home: NextPage = ({
             Foton Dev Team 👋🏽
           </Heading>
         </Box>
-        <NewBooksContainer />
-        <CurrentlyReadingContainer />
-        <ReviewsOfTheDayContainer />
+        <NewBooksContainer books={books} />
+        <CurrentlyReadingContainer books={books} />
+        <ReviewsOfTheDayContainer books={books} />
       </Box>
     </div>
   );

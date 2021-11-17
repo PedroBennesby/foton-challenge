@@ -23,6 +23,7 @@ module.exports = {
     'require-jsdoc': 'off',
     'react/no-children-prop': 'off',
     'no-unused-vars': 'off',
+    'no-array-constructor': 'off',
   },
   settings: {
     react: {
